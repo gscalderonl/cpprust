@@ -18,6 +18,12 @@
 
 int main()
 {
+    Person person;
+    person.name = "John";
+    person.age = 30;
+
+    take_person(person);
+    
     int level = 5;
     std::string message = "This is a test message";
     std::vector<std::string> attributes = {"Attribute1", "Attribute2", "Attribute3"}; 

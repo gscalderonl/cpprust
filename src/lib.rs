@@ -5,13 +5,25 @@ use cxx::{CxxString, CxxVector};
 
 #[cxx::bridge]
 mod ffi {
+    struct Person
+    {
+        name: String,
+        age: i32,
+    }
+
     extern "Rust"
     {
+        fn take_person(person: &Person);
         fn log_message_from_rust_log_crate(level: i32, message: &CxxString, attributes: &CxxVector<CxxString>);
         fn init_rust_logger() -> ();
     }
 }
-// pass an argument from cpp to rust (string, int and others std::map)
+
+pub fn take_person(person: &ffi::Person)
+{
+    println!("Received person: {} who is {} years old", person.name, person.age);
+}
+
 pub fn log_message_from_rust_log_crate(level: i32, message: &CxxString, attributes: &CxxVector<CxxString>)
 {
     match level
