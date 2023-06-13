@@ -18,12 +18,10 @@
 
 int main()
 {
-    int level = 2;
+    int level = 5;
     std::string message = "This is a test message";
     std::vector<std::string> attributes = {"Attribute1", "Attribute2", "Attribute3"}; 
     init_rust_logger();
-    std::cout << "starting from C++\n";
     log_message_from_rust_log_crate(level, message, attributes);
-    std::cout << "finishing with C++\n";
     return 0;
 }
