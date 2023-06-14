@@ -9,15 +9,18 @@
       -pthread -l dl
 */
 
-// consider the ffi part of Rust code
 #include "cpprust/src/lib.rs.h"
 #include <vector>
 #include <string>
-
 #include <iostream>
 
 int main()
 {
+
+    MyClass my_object(42);
+    print_value_from_rust(my_object);
+
+
     std::vector<Person> people;
 
     Person p1;

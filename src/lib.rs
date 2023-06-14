@@ -3,10 +3,14 @@ extern crate log;
 extern crate env_logger;
 use cxx::{CxxString, CxxVector};
 
-// use a class and use some method 
 #[cxx::bridge]
 mod ffi {
     
+    struct MyClass
+    {
+        value: i32,
+    }
+
     struct Person
     {
         name: String,
@@ -15,16 +19,25 @@ mod ffi {
 
     extern "Rust"
     {
+        fn print_value_from_rust(my_object: &MyClass);
         fn log_vector_from_rust_log_crate(people: &CxxVector<Person>);
         fn log_struct_from_rust_log_crate(person: &Person);
         fn log_message_from_rust_log_crate(level: i32, message: &CxxString, attributes: &CxxVector<CxxString>);
         fn init_rust_logger() -> ();
     }
 
-    extern unsafe "C++"
+    unsafe extern "C++"
     {
-        
+        include!("cpprust/src/my_class.hpp");
+        type MyClass;
+        fn get_value(&self) -> i32;
     }
+}
+
+pub fn print_value_from_rust(my_object: &ffi::MyClass)
+{
+    let value = my_object.get_value();
+    println!("Value: {}", value);
 }
 
 pub fn log_vector_from_rust_log_crate(people: &CxxVector<ffi::Person>)
