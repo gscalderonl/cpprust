@@ -35,14 +35,13 @@ int main()
     p3.age = 25;
     people.push_back(p3);    
 
-    take_people(people);
-
-    take_person(p1);
     
     int level = 5;
     std::string message = "This is a test message";
     std::vector<std::string> attributes = {"Attribute1", "Attribute2", "Attribute3"}; 
     init_rust_logger();
+    log_vector_from_rust_log_crate(people);
+    log_struct_from_rust_log_crate(p1);
     log_message_from_rust_log_crate(level, message, attributes);
     return 0;
 }

@@ -3,6 +3,7 @@ extern crate log;
 extern crate env_logger;
 use cxx::{CxxString, CxxVector};
 
+// use a class and use some method 
 #[cxx::bridge]
 mod ffi {
     
@@ -14,23 +15,28 @@ mod ffi {
 
     extern "Rust"
     {
-        fn take_people(people: &CxxVector<Person>);
-        fn take_person(person: &Person);
+        fn log_vector_from_rust_log_crate(people: &CxxVector<Person>);
+        fn log_struct_from_rust_log_crate(person: &Person);
         fn log_message_from_rust_log_crate(level: i32, message: &CxxString, attributes: &CxxVector<CxxString>);
         fn init_rust_logger() -> ();
     }
-}
 
-pub fn take_people(people: &CxxVector<ffi::Person>)
-{
-    for person in people{
-        println!("Received person: {} who is {} years old", person.name, person.age);
+    extern unsafe "C++"
+    {
+        
     }
 }
 
-pub fn take_person(person: &ffi::Person)
+pub fn log_vector_from_rust_log_crate(people: &CxxVector<ffi::Person>)
 {
-    println!("Received person: {} who is {} years old", person.name, person.age);
+    for person in people{
+        info!("Received person: {} who is {} years old", person.name, person.age);
+    }
+}
+
+pub fn log_struct_from_rust_log_crate(person: &ffi::Person)
+{
+    trace!("Received persons: {} who is {} years old", person.name, person.age);
 }
 
 pub fn log_message_from_rust_log_crate(level: i32, message: &CxxString, attributes: &CxxVector<CxxString>)
