@@ -16,10 +16,8 @@
 
 int main()
 {
-
     MyClass my_object(42);
     print_value_from_rust(my_object);
-
 
     std::vector<Person> people;
 
@@ -41,7 +39,8 @@ int main()
     
     int level = 5;
     std::string message = "This is a test message";
-    std::vector<std::string> attributes = {"Attribute1", "Attribute2", "Attribute3"}; 
+    std::vector<std::string> attributes = {"Attribute1", "Attribute2", "Attribute3"};
+
     init_rust_logger();
     log_vector_from_rust_log_crate(people);
     log_struct_from_rust_log_crate(p1);
