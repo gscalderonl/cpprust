@@ -5,6 +5,7 @@ use cxx::{CxxString, CxxVector};
 
 #[cxx::bridge]
 mod ffi {
+    
     struct Person
     {
         name: String,
@@ -13,9 +14,17 @@ mod ffi {
 
     extern "Rust"
     {
+        fn take_people(people: &CxxVector<Person>);
         fn take_person(person: &Person);
         fn log_message_from_rust_log_crate(level: i32, message: &CxxString, attributes: &CxxVector<CxxString>);
         fn init_rust_logger() -> ();
+    }
+}
+
+pub fn take_people(people: &CxxVector<ffi::Person>)
+{
+    for person in people{
+        println!("Received person: {} who is {} years old", person.name, person.age);
     }
 }
 
@@ -33,7 +42,6 @@ pub fn log_message_from_rust_log_crate(level: i32, message: &CxxString, attribut
 
         _ => warn!("Invalid log level: {} Message: {} Attributes: {:?}", level, message, attributes),
     }
-    // info!("Log from log crate library RUST");
 }
 
 pub fn init_rust_logger() -> ()

@@ -18,11 +18,26 @@
 
 int main()
 {
-    Person person;
-    person.name = "John";
-    person.age = 30;
+    std::vector<Person> people;
 
-    take_person(person);
+    Person p1;
+    p1.name = "John";
+    p1.age = 30;
+    people.push_back(p1);
+
+    Person p2;
+    p2.name = "Bob";
+    p2.age = 40;
+    people.push_back(p2);
+
+    Person p3;
+    p3.name = "Aaron";
+    p3.age = 25;
+    people.push_back(p3);    
+
+    take_people(people);
+
+    take_person(p1);
     
     int level = 5;
     std::string message = "This is a test message";
