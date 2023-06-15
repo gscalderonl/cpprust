@@ -4,42 +4,34 @@
 #include <string>
 #include <iostream>
 
-static void BM_log_vector_from_cpp_to_rust_log_crate(benchmark::State& state)
+static void BM_log_string_from_cpp_to_rust_log_crate(benchmark::State& state)
 {
-    std::vector<Person> people;
-
-    Person p1;
-    p1.name = "John";
-    p1.age = 30;
-    people.push_back(p1);
-
-    Person p2;
-    p2.name = "Bob";
-    p2.age = 40;
-    people.push_back(p2);
-
-    Person p3;
-    p3.name = "Aaron";
-    p3.age = 25;
-    people.push_back(p3);
+    std::string message = "This is a test message";
 
     for (auto _ : state)
     {
-        log_vector_from_cpp_to_rust_log_crate(people);
+        log_string_from_cpp_to_rust_log_crate(message);
     }
 }
 
-static void BM_log_message_from_cpp_to_rust_log_crate(benchmark::State& state)
+static void BM_log_int_from_cpp_to_rust_log_crate(benchmark::State& state)
 {
     int level = 1;
-    std::string message = "This is a test message";
+
+    for (auto _ : state)
+    {
+        log_int_from_cpp_to_rust_log_crate(level);
+    }
+}
+
+static void BM_log_vector_from_cpp_to_rust_log_crate(benchmark::State& state)
+{
     std::vector<std::string> attributes = {"A1", "A2", "A3"};
 
     for (auto _ : state)
     {
-        log_message_from_cpp_to_rust_log_crate(level, message, attributes);
+        log_vector_from_cpp_to_rust_log_crate(attributes);
     }
-
 }
 
 static void BM_log_struct_from_cpp_to_rust_log_crate(benchmark::State& state)
@@ -56,16 +48,17 @@ static void BM_log_struct_from_cpp_to_rust_log_crate(benchmark::State& state)
 
 static void BM_log_class_from_cpp_to_rust_log_crate(benchmark::State& state)
 {
-    MyClass my_object(42);
+    Animal dog(42);
 
     for(auto _ : state)
     {
-        log_class_from_cpp_to_rust_log_crate(my_object);
+        log_class_from_cpp_to_rust_log_crate(dog);
     }
 }
 
+BENCHMARK(BM_log_string_from_cpp_to_rust_log_crate);
+BENCHMARK(BM_log_int_from_cpp_to_rust_log_crate);
 BENCHMARK(BM_log_vector_from_cpp_to_rust_log_crate);
-BENCHMARK(BM_log_message_from_cpp_to_rust_log_crate);
 BENCHMARK(BM_log_struct_from_cpp_to_rust_log_crate);
 BENCHMARK(BM_log_class_from_cpp_to_rust_log_crate);
 
