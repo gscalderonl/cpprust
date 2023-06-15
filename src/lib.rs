@@ -73,7 +73,7 @@ pub fn init_rust_logger() -> ()
         .write(true)
         .append(false)
         .create(true)
-        .open("output.log")
+        .open("/dev/null")
         .unwrap();
 
     let file = Mutex::new(file);
