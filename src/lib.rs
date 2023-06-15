@@ -71,7 +71,7 @@ pub fn init_rust_logger() -> ()
 {
     let file = OpenOptions::new()
         .write(true)
-        .append(true)
+        .append(false)
         .create(true)
         .open("output.log")
         .unwrap();
