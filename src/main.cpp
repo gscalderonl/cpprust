@@ -26,11 +26,11 @@ static void BM_log_int_from_cpp_to_rust_log_crate(benchmark::State& state)
 
 static void BM_log_vector_from_cpp_to_rust_log_crate(benchmark::State& state)
 {
-    std::vector<std::string> attributes = {"A1", "A2", "A3"};
+    std::vector<std::string> names = {"Alice", "Bob", "Charlie"};
 
     for (auto _ : state)
     {
-        log_vector_from_cpp_to_rust_log_crate(attributes);
+        log_vector_from_cpp_to_rust_log_crate(names);
     }
 }
 
