@@ -63,24 +63,25 @@ pub fn log_class_from_cpp_to_rust_log_crate(animal: &ffi::Animal)
 
 pub fn init_rust_logger() -> ()
 {
-    let logger = Box::new(NoopLogger);
+    env_logger::init();
+    // let logger = Box::new(NoopLogger);
 
-    log::set_boxed_logger(logger).unwrap();
-    log::set_max_level(log::LevelFilter::Trace);
+    // log::set_boxed_logger(logger).unwrap();
+    // log::set_max_level(log::LevelFilter::Trace);
 }
 
-struct NoopLogger;
+// struct NoopLogger;
 
-impl log::Log for NoopLogger {
-    fn enabled(&self, _metadata: &log::Metadata) -> bool {
-        true
-    }
+// impl log::Log for NoopLogger {
+//     fn enabled(&self, _metadata: &log::Metadata) -> bool {
+//         true
+//     }
 
-    fn log(&self, _record: &log::Record) {
-        // do nothing
-    }
+//     fn log(&self, _record: &log::Record) {
+//         // do nothing
+//     }
 
-    fn flush(&self) {
-        // do nothing
-    }
-}
+//     fn flush(&self) {
+//         // do nothing
+//     }
+// }

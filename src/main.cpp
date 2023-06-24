@@ -6,8 +6,7 @@
 
 static void BM_log_string_from_cpp_to_rust_log_crate(benchmark::State& state)
 {
-    std::string message = "This is a test message";
-
+    std::string message = "Test";
     for (auto _ : state)
     {
         log_string_from_cpp_to_rust_log_crate(message);
@@ -56,6 +55,8 @@ static void BM_log_class_from_cpp_to_rust_log_crate(benchmark::State& state)
     }
 }
 
+
+// BENCHMARK(BM_log_string_from_cpp_to_rust_println);
 BENCHMARK(BM_log_string_from_cpp_to_rust_log_crate);
 BENCHMARK(BM_log_int_from_cpp_to_rust_log_crate);
 BENCHMARK(BM_log_vector_from_cpp_to_rust_log_crate);
